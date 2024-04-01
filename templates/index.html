@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CO2 Emissions Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>CO2 Emissions Calculator</h1>
+        <form id="co2-form" method="post" action="/calculate_co2">
+            <div class="form-group">
+                <label for="fuel-type">Fuel Type:</label>
+                <select id="fuel-type" name="fuel-type">
+                    <option value="regular_gasoline">Regular Gasoline</option>
+                    <option value="premium_gasoline">Premium Gasoline</option>
+                    <option value="petrol">Petrol</option>
+                    <option value="diesel">Diesel</option>
+                    <option value="electric">E85 (Ethanol)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="engine-size">Engine Size (cc):</label>
+                <input type="text" id="engine-size" name="engine-size" required>
+            </div>
+            <div class="form-group">
+                <label for="cylinders">Cylinders:</label>
+                <input type="text" id="cylinders" name="cylinders" required>
+            </div>
+            <div class="form-group">
+                <label for="fuel-consumption">Fuel Consumption (L/km):</label>
+                <input type="text" id="fuel-consumption" name="fuel-consumption"  required>
+            </div>
+            <button type="submit">Calculate CO2 Emissions</button>
+        </form>
+        <div id="result">
+            {% if co2_emissions %}
+                {{ co2_emissions }} g/kms
+            {% endif %}
+        </div>
+        <h2>OR Upload File</h2>
+        <!--  -->
+        <form id="co2-form" method="post" action="/calculate_co2_file" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Upload CSV or Excel file:</label>
+                <input type="file" id="file" name="file" accept=".csv, .xlsx" required>
+            </div>
+            <button type="submit">Calculate CO2 Emissions</button>
+        </form>
+        {% if emissions_table %}
+        <div class="emissions-table">
+            <h2>Emissions Table</h2>
+            {{ emissions_table | safe }}
+        </div>
+        {% endif %}
+    </div>
+    <script>
+        
+    </script>
+</body>
+</html>
