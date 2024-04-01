@@ -96,4 +96,4 @@ def calculate_co2_file():
     return render_template('index.html', emissions_table=emissions_table)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
